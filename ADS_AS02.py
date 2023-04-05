@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Apr  5 14:11:57 2023
+Created on Wed Apr  1 14:11:57 2023
 
 @author: bhagy
 """
@@ -10,7 +10,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-#Start of main program
+#Start of 1st program CO2 Emission (in KT) from 1990 to 2015
 #Reading data from the source file. Here source file type is csv. 
 #Therefore pandas reading funtion must be pd.read_csv
 data_co2emi = pd.read_csv("API_EN.ATM.CO2E.KT_DS2_en_csv_v2_5358347.csv", header=2, index_col='Country Name', usecols=['Country Name', 'Indicator Name', '1990', '1995', '2000', '2005', '2010', '2015', '2020'])
@@ -34,21 +34,26 @@ data_co2emi_t_cleaned = data_co2emi_transposed.dropna()
 
 data_co2emi_t_cleaned.iloc[1:, :] = data_co2emi_t_cleaned.iloc[1:, :].astype(int)
 
-print(data_co2emi_t_cleaned)
+print(data_co2emi_t_cleaned.describe())
 
 print(data_co2emi_t_cleaned.iloc[1:, :])
 
 # plot the bar chart
 chart1 = data_co2emi_t_cleaned.iloc[1:, :].plot(kind='bar', stacked=False, colormap='rainbow')
+#labelling x axis and y axis
 chart1.set_xlabel('Year')
 chart1.set_ylabel('CO2 Emission (in KT)')
+#Add Title to the graph
 chart1.set_title('CO2 Emission from 1990 to 2015')
+#Add legend to explain the each lineplot 
 chart1.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+# save the plot output as png
 plt.savefig('CO2_Emission.png')
+#Display the plot
 plt.show()
 
 
-#Start of main program
+#Start of 2nd program Electricity production from oil, gas and coal sources (% of total) from 1990 to 2015
 #Reading data from the source file. Here source file type is csv. 
 #Therefore pandas reading funtion must be pd.read_csv
 data_Electricity = pd.read_csv("API_EG.ELC.FOSL.ZS_DS2_en_csv_v2_5358479.csv", header=2, index_col='Country Name', usecols=['Country Name', 'Indicator Name', '1990', '1995', '2000', '2005', '2010', '2015', '2020'])
@@ -78,13 +83,21 @@ print(data_Electricity_t_cleaned.iloc[1:, :])
 
 # plot the bar chart
 chart2 = data_Electricity_t_cleaned.iloc[1:, :].plot(kind='bar', stacked=False, colormap='rainbow')
+#labelling x axis and y axis
 chart2.set_xlabel('Year')
 chart2.set_ylabel('Electricity production from oil, gas and coal sources (% of total)')
+#Add Title to the graph
 chart2.set_title('Electricity Generation from 1990 to 2015')
+#Add legend to explain the each lineplot 
 chart2.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+# save the plot output as png
 plt.savefig('Electricity Generation.png')
+#Display the plot
 plt.show()
 
+#Start of 3rd program Population (% of total) from 1990 to 2015
+#Reading data from the source file. Here source file type is csv. 
+#Therefore pandas reading funtion must be pd.read_csv
 data_population = pd.read_csv("API_SP.POP.TOTL_DS2_en_csv_v2_5358404.csv", header=2, index_col='Country Name', usecols=['Country Name', 'Indicator Name', '1990', '1995', '2000', '2005', '2010', '2015', '2020'])
 
 selected_data_population = data_population.loc[selected_countries]
@@ -122,6 +135,9 @@ plt.savefig("Population.png")
 #Display the plot
 plt.show()
 
+#Start of 4th program Electric  Power consumption (kWh per capita) from 1990 to 2015
+#Reading data from the source file. Here source file type is csv. 
+#Therefore pandas reading funtion must be pd.read_csv
 data_powerconsum = pd.read_csv("API_EG.USE.ELEC.KH.PC_DS2_en_csv_v2_5359189.csv", header=2, index_col='Country Name', usecols=['Country Name', 'Indicator Name', '1990', '1995', '2000', '2005', '2010', '2015', '2020'])
 
 selected_data_powerconsum = data_powerconsum.loc[selected_countries]
@@ -162,7 +178,9 @@ plt.show()
 
 
 
-
+#Start of 5th program Electricity production from nuclear sources (% of total) from 1990 to 2015
+#Reading data from the source file. Here source file type is csv. 
+#Therefore pandas reading funtion must be pd.read_csv
 data_nuclearpower = pd.read_csv("API_EG.ELC.NUCL.ZS_DS2_en_csv_v2_5362829.csv", header=2, index_col='Country Name', usecols=['Country Name', 'Indicator Name', '1990', '1995', '2000', '2005', '2010', '2015', '2020'])
 
 selected_data_nuclearpower = data_nuclearpower.loc[selected_countries]
@@ -202,7 +220,9 @@ plt.savefig("Electricity production from nuclear source.png")
 plt.show()
 
 
-
+#Start of 5th program Electricity production from renewable sources, excluding hydroelectric (kWh) from 1990 to 2015
+#Reading data from the source file. Here source file type is csv. 
+#Therefore pandas reading funtion must be pd.read_csv
 data_renewable = pd.read_csv("API_EG.ELC.RNWX.KH_DS2_en_csv_v2_5358682.csv", header=2, index_col='Country Name', usecols=['Country Name', 'Indicator Name', '1990', '1995', '2000', '2005', '2010', '2015', '2020'])
 
 selected_data_renewable = data_renewable.loc[selected_countries]
